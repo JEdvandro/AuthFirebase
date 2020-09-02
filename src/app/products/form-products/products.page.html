@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">  
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+   </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+<form [formGroup]="form" (ngSubmit)="saveProduct()">
+<ion-list>
+  <ion-item>
+    <ion-label position="stacked">Nome</ion-label>
+    <ion-input type="text" formControlName="name" placeholder="Nome"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!f.name.valid && (f.name.dirty || f.name.touched)" color="danger">
+    <div [hidden]="!f.name.errors.required">
+      Campo Obrigatório
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Descrição</ion-label>
+    <ion-input type="text" formControlName="description" placeholder="Descrição"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Preço</ion-label>
+    <ion-input type="number" formControlName="price" placeholder="0,00"></ion-input>
+  </ion-item> 
+  <ion-item>
+    <ion-label>Promoção</ion-label>
+    <ion-toggle formControlName="promotion"></ion-toggle>
+  </ion-item>
+
+  <ion-item *ngIf="imgUrl==''">
+    <ion-label class="form-control-label">Foto</ion-label>
+    <ion-input type="file" class="form-control" accept="image/png,image/jpeg" (change)="upload($event)" formControlName="img"></ion-input>
+    <ion-item *ngIf="f.img.invalid && (form.controls.img.dirty || form.controls.img.touched)" class="text-danger">
+      <div *ngIf="f.img.errors.imgType">
+        Os formatos permitidos de imagem são: png e jpeg
+      </div>
+    </ion-item>
+  </ion-item>
+  <ion-item class="form-group" [hidden]="!hasImg">
+    <img src="{{ imgUrl }}" class="img-thumbnail d-block" style="max-width: 100px;" [hidden]="!hasImg" />
+    <ion-button expand="block" color="danger" (click)="removerImg(productId, filePath)" [hidden]="!hasImg" >
+      <ion-icon slot="start" name="trash"></ion-icon> Remover Imagem
+    </ion-button>
+  </ion-item>
+  <ion-item [hidden]="!hasImg">
+    <ion-label class="form-control-label">+Fotos</ion-label>
+    <ion-input type="file" class="form-control" accept="image/png,image/jpeg" (change)="uploads($event)" formControlName="imgs"></ion-input>
+    <ion-item *ngIf="f.img.invalid && (form.controls.img.dirty || form.controls.img.touched)" class="text-danger">
+      <div *ngIf="f.img.errors.imgType">
+        Os formatos permitidos de imagem são: png e jpeg
+      </div>
+    </ion-item>
+		  
+  </ion-item>
+  <div class="ion-align-items-baseline">
+    <ion-button expand="block" color="warning" (click)="addImg()" [hidden]="!hasImg" >
+      Adicionar <ion-icon name="add"></ion-icon> Fotos
+    </ion-button>
+  </div>
+</ion-list>
+
+<ion-button type="submit" expand="block">
+  <ion-icon slot="start" name="save-outline"></ion-icon> Salvar Produto
+</ion-button>
+<ion-button expand="block" color="danger" (click)="removeProduto(productId, filePath)">
+  <ion-icon slot="start" name="trash"></ion-icon> Remover Produto
+</ion-button>
+</form>
+
+<ion-slides pager="true" [options]="slideOpts" >
+  <ion-slide *ngFor="let product of productImg">
+    <img [src]="product.imgUrl" alt="" style="max-width: 150px;">
+  </ion-slide>
+</ion-slides>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-footer>

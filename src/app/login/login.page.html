@@ -1,0 +1,100 @@
+<ion-content class="swiper-no-swiping">
+  <div class="container top">
+  <img src="../../assets/img/logo.jpg" alt="" >
+
+    <ion-segment (ionChange)="segmentChanged($event)" mode="ios" value="login">
+      <ion-segment-button mode="ios" value="login">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="register">
+        <ion-label>Cadastro</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-slides>
+    <ion-slide> 
+      <form [formGroup]="formLogin" (ngSubmit)="login()">
+      <div class="slide-inner ion-padding">
+        <span>Login</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <!-- <ion-input inputmode="email" type="email" placeholder="E-mail" [(ngModel)]="userLogin.email" required></ion-input> -->
+          <ion-input type="email" formControlName="email"  placeholder="E-mail"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!f.email.valid && (f.email.dirty || f.email.touched)" color="danger">
+          <div [hidden]="!f.email.errors.required">
+            Campo Obrigatório
+          </div>
+                 
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <!-- <ion-input inputmode="text" type="password" placeholder="Senha" [(ngModel)]="userLogin.password" required></ion-input> -->
+          <ion-input type="password" formControlName="password" placeholder="Senha"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!f.password.valid && (f.password.dirty || f.password.touched)" color="danger">
+          <div [hidden]="!f.password.errors.required">
+            Campo Obrigatório
+          </div>
+                 
+        </ion-item>
+        <!-- <ion-button class="ion-margin-top" (click)="login()" color="light" expand="block"> -->
+          <!-- Entrar -->
+        <!-- </ion-button> -->
+        <ion-button type="submit" expand="block"> 
+          Entrar
+        </ion-button>
+
+
+        <ion-button class="ion-margin-top" (click)="resetpassword()" color="light" expand="block">
+          Esqueceu a senha?
+        </ion-button>
+      </div>
+    </form>
+    </ion-slide>
+
+    <ion-slide>
+      <form [formGroup]="formRegister" (ngSubmit)="register()">
+      <div class="slide-inner ion-padding">
+        <span>Cadastro</span>
+        <!-- https://ionicframework.com/docs/api/item#css-custom-properties -->
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="Nome" required></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <!-- <ion-input type="email" placeholder="E-mail" [(ngModel)]="userRegister.email" required></ion-input> -->
+          <ion-input type="email" formControlName="email" placeholder="E-mail"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <!-- <ion-input type="password" placeholder="Senha" [(ngModel)]="userRegister.password" required></ion-input> -->
+          <ion-input type="password" formControlName="password" placeholder="Senha"></ion-input>
+        </ion-item>
+
+        <ion-button type="submit" expand="block"> 
+          Cadastrar
+        </ion-button>
+
+
+        <!-- <ion-button class="ion-margin-top" (click)="register()" color="light" expand="block"> -->
+          <!-- Cadastrar -->
+        <!-- </ion-button> -->
+      </div>
+    </form>
+    </ion-slide>
+
+  </ion-slides>
+
+  <div class="ocean">
+    <!-- <div class="waves">  </div> -->
+    <!-- <div class="container bottom ion-text-center"> -->
+      <!-- <span style="color:black">SKINÃO BEBIDAS</span> -->
+    <!-- </div> -->
+
+  </div>
+  
+
+
+</ion-content>

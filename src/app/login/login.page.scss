@@ -1,0 +1,52 @@
+ion-segment-button{
+   color: #0072bc;   
+}
+ion-content {
+    --overflow: hidden;
+}
+
+.container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+ion-slides{
+    height: 125%;
+    .slide-inner{ 
+        width: 100%;
+        color: white;
+        background-color: black;
+        border-radius: 10px;
+        ion-item{
+            --ion-background-color:rgba(255, 255, 255, 0.61) ;
+            --border-radius:10px;
+            ion-input{
+                --color: white;    
+            }
+        }
+    }
+}
+
+.ocean{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45%;
+    background-image: url('../../assets/img/bar.jpg');
+    background-size: contain;
+   // background-color: yellow;
+   // .waves{
+   //     position: absolute;
+        // top: -20%;
+        // left: 0;
+        // right: 0;
+        // height: 100px;
+    //    
+        
+    // }
+}

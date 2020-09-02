@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Produtos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+   </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let product of products | async">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-align-self-start">
+            <ion-avatar class="ion-align-self-start" *ngIf="product.filePath">
+              <img [src]="product.imgUrl"/>
+            </ion-avatar>
+            <span>{{ product.name }}</span>
+          </ion-col>
+          <ion-col  class="ion-align-self-center">
+            <span color="warning">R$ {{ product.price }}</span>
+          </ion-col>
+          <ion-col  class="ion-align-self-end">
+              <ion-toggle [checked]="product.promotion"></ion-toggle>
+            </ion-col>
+          </ion-row>  
+        <ion-row>
+            <ion-col>
+              <span [innerHTML]="product.description"></span>
+            </ion-col>
+            <ion-col class="ion-align-self-end" size="2">
+              <ion-button expand="block" color="warning" [routerLink]="['/products/edit', product.id]">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col class="ion-align-self-end" size="2">
+              <ion-button expand="block" color="danger" (click)="removeProduto(product.id, product.filePath)">
+                <ion-icon  name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>    
+        <!-- <app-valor [valor]="product.preco"></app-valor> -->
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/products']" color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>    
+</ion-content>
+<ion-footer>
+  
+  
+
+</ion-footer>
+
